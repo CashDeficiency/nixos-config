@@ -7,12 +7,16 @@
   home.packages = with pkgs; [
     firefox
     google-chrome
+    polybar
   ];
 
   programs.git = {
     enable = true;
     userName = "CashDeficiency";
     userEmail = "cashdeficiency@gmail.com";
+    extraConfig = {
+      init.defaultBranch = "main";
+    };
   };
 
   home.stateVersion = "24.05";

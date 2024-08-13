@@ -29,8 +29,12 @@
   # ---
   services.xserver.enable = true;
   services.xserver.desktopManager.pantheon.enable = true;
-  environment.systemPackages = with pkgs; [ git neovim ];
+  environment.systemPackages = with pkgs; [
+    git
+    neovim
+  ];
   environment.variables.EDITOR = "nvim";
+  virtualisation.docker.enable = true;
 
   # Sound
   # ---
@@ -45,6 +49,7 @@
       noto-fonts-emoji
       fira-code
       fira-code-symbols
+      font-awesome
     ];
 
     fontconfig.defaultFonts.monospace = [ "Fira Code" ];
@@ -54,7 +59,7 @@
   # ---
   users.users.cashd = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
     # more settings are managed by home-manager
   };
 
