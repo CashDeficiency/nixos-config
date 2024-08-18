@@ -7,8 +7,10 @@
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/vda";
+  };
 
   networking.hostName = "nixvm";
   networking.networkmanager.enable = true;
@@ -19,7 +21,7 @@
 
   services.xserver = {
     enable = true;
-    desktopManager.pantheon.enable = true;
+    desktopManager.cinnamon.enable = true;
   };
 
   sound.enable = true;
@@ -30,13 +32,9 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
+
+  services.spice-vdagentd.enable = true;
 
   users.users.nixos = {
     isNormalUser = true;
@@ -49,8 +47,15 @@
   };
 
   environment.systemPackages = with pkgs; [
+    git
     neovim
     spice-vdagent
+  ];
+
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -60,4 +65,6 @@
     enable = true;
     operation = "boot";
   };
+
+  system.stateVersion = "24.05";
 }
