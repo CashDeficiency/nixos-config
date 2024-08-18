@@ -28,7 +28,14 @@
   # System Environment
   # ---
   services.xserver.enable = true;
-  services.xserver.desktopManager.pantheon.enable = true;
+  services.xserver.windowManager.i3 = {
+    enable = true;
+    extraPackages = with pkgs; [
+      i3lock
+      rofi
+      polybar
+    ];
+  };
   environment.systemPackages = with pkgs; [
     git
     neovim
