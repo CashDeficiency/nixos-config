@@ -24,6 +24,11 @@
     desktopManager.cinnamon.enable = true;
   };
 
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "nixos";
+  };
+
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
