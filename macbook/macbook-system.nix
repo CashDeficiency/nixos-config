@@ -34,9 +34,11 @@
   nixpkgs.config.allowUnfree = true;
   hardware.facetimehd.enable = true;
 
-  # swap left ctrl and fn on MacBook Air
+  # swap left ctrl and fn, and 
+  # make function keys the default action without pressing fn
   boot.extraModprobeConfig = ''
     options hid_apple swap_fn_leftctrl=1
+    options hid_apple fnmode=2
   '';
 
   # reverse scrolling direction
