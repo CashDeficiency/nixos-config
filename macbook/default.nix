@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
+    ./macbook-system.nix
   ];
 
   # Bootloader
@@ -17,7 +17,7 @@
 
   # Networking
   # ---
-  networking.hostName = "MacBookAir"; # Define your hostname.
+  networking.hostName = "macbook"; # Define your hostname.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Time and Locale
@@ -34,6 +34,7 @@
       i3lock
       rofi
       polybar
+      alacritty
     ];
   };
   environment.systemPackages = with pkgs; [
@@ -87,17 +88,7 @@
 
   # Misc configs:
   # ---
-  nixpkgs.config.allowUnfree = true;  # for unfree software like broadcom_sta
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # swap left ctrl and fn on MacBook Air
-  boot.extraModprobeConfig = ''
-  options hid_apple swap_fn_leftctrl=1
-  '';
-
-  # use natural scrolling on MacBook Air trackpad
-  services.libinput.enable = true;
-  services.libinput.touchpad.naturalScrolling = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
