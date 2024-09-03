@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
     firefox
     google-chrome
+    openvpn
   ];
 
   programs.git = {

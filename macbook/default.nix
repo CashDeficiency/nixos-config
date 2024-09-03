@@ -31,13 +31,16 @@
   services.xserver.windowManager.i3 = {
     enable = true;
     extraPackages = with pkgs; [
-      i3lock
-      rofi
-      polybar
       alacritty
+      feh
+      i3lock
+      pavucontrol
+      polybar
+      rofi
     ];
   };
   environment.systemPackages = with pkgs; [
+    btop
     git
     neovim
   ];
