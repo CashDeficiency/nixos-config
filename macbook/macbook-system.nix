@@ -46,4 +46,7 @@
     enable = true;
     touchpad.naturalScrolling = true;
   };
+
+  # fix "too many open files" error
+  systemd.extraConfig = "DefaultLimitNOFILE=2048";
 }

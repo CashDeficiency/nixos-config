@@ -19,6 +19,19 @@
     };
   };
 
+  # Symlink config files
+  home.file = {
+    "${config.xdg.configHome}/i3" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/i3";
+    };
+    "${config.xdg.configHome}/polybar" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/polybar";
+    };
+    "${config.xdg.configHome}/alacritty" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/alacritty";
+    };
+  };
+
   home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;

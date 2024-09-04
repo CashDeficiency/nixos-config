@@ -35,7 +35,7 @@
       feh
       i3lock
       pavucontrol
-      polybar
+      (polybar.override { pulseSupport = true; })
       rofi
     ];
   };
