@@ -39,8 +39,14 @@
       rofi
     ];
   };
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "catppuccin-mocha";
+  };
   environment.systemPackages = with pkgs; [
     btop
+    catppuccin-sddm
+    kdePackages.sddm
     git
     neovim
   ];
