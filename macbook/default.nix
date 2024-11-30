@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
+    ./macbook-system.nix
   ];
 
   # Bootloader
@@ -17,7 +17,7 @@
 
   # Networking
   # ---
-  networking.hostName = "MacBookAir"; # Define your hostname.
+  networking.hostName = "macbook"; # Define your hostname.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Time and Locale
@@ -28,9 +28,30 @@
   # System Environment
   # ---
   services.xserver.enable = true;
-  services.xserver.desktopManager.pantheon.enable = true;
-  environment.systemPackages = with pkgs; [ git neovim ];
+  services.xserver.windowManager.i3 = {
+    enable = true;
+    extraPackages = with pkgs; [
+      alacritty
+      feh
+      i3lock
+      pavucontrol
+      (polybar.override { pulseSupport = true; })
+      rofi
+    ];
+  };
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "catppuccin-mocha";
+  };
+  environment.systemPackages = with pkgs; [
+    btop
+    catppuccin-sddm
+    kdePackages.sddm
+    git
+    neovim
+  ];
   environment.variables.EDITOR = "nvim";
+  virtualisation.docker.enable = true;
 
   # Sound
   # ---
@@ -45,6 +66,7 @@
       noto-fonts-emoji
       fira-code
       fira-code-symbols
+      font-awesome
     ];
 
     fontconfig.defaultFonts.monospace = [ "Fira Code" ];
@@ -54,7 +76,7 @@
   # ---
   users.users.cashd = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
     # more settings are managed by home-manager
   };
 
@@ -75,17 +97,7 @@
 
   # Misc configs:
   # ---
-  nixpkgs.config.allowUnfree = true;  # for unfree software like broadcom_sta
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # swap left ctrl and fn on MacBook Air
-  boot.extraModprobeConfig = ''
-  options hid_apple swap_fn_leftctrl=1
-  '';
-
-  # use natural scrolling on MacBook Air trackpad
-  services.libinput.enable = true;
-  services.libinput.touchpad.naturalScrolling = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

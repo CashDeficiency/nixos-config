@@ -1,10 +1,13 @@
 {
-  description = "NixOS configs for CashDeficiency";
+  description = "CashDeficiency's NixOS configs";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
@@ -20,6 +23,12 @@
 	    home-manager.useUserPackages = true;
 	    home-manager.users.cashd = import ./home.nix;
 	  }
+        ];
+      };
+      nixvm = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./nixvm
         ];
       };
     };
